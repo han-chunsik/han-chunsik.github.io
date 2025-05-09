@@ -1,0 +1,35 @@
+---
+layout: default
+title: Han Chunsik's Blog
+subtitle: Get shit done! taking the SH out of IT.
+pagination: true
+---
+
+<section class="post-list">
+
+  <header class="post-header intro">
+    <div class="intro-in">
+      <h1 class="post-title">{{ page.title }}</h1>
+      {% if page.subtitle %}
+        <h2 class="intro-subtitle">{{ page.subtitle }}</h2>
+      {% endif %}
+    </div>
+  </header>
+
+  {% include category.html %}
+
+  {% for post in paginator.posts %}
+    <article class="post-item container">
+      <header>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <h1 class="post-title">
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h1>
+      </header>
+
+      <p>{{ post.description }}</p>
+    </article>
+  {% endfor %}
+
+  {% include pagination.html %}
+</section>

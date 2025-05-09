@@ -1,0 +1,51 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+source: source
+destination: _site
+sass:
+  sass_dir: _sass
+  style: expanded # compressed # expanded
+
+# permalink and highlighter
+permalink   : /:year/:title/
+markdown:         kramdown
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    guess_lang: true
+
+# paginate
+paginate: 5
+paginate_path: "/blog/page:num/"
+
+# 플러그인 등록
+plugins:
+  - jekyll-paginate
+
+# SEO settings
+title: han-chunsik.dev
+description: ""
+keywords: "DevOps"
+
+# Site settings
+url: https://han-chunsik.github.io
+baseurl: "/blog"
+# baseurl: ""
+
+# Author settings
+author:
+  name      : Han Chunsik
+  job       : DevOps Engineer
+  email     : vpdrnls96@gmail.com
+  url       : https://github.com/han-chunsik/blog
+  github    : https://github.com/han-chunsik
+  linkedin  : https://www.linkedin.com/in/haha-ch
+  books     : https://han-chunsik.github.io/books/
+
+# google_analytics: UA-52446115-1
+repo: https://github.com/han-chunsik/blog
