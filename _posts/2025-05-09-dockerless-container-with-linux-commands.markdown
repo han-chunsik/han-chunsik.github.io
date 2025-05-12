@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "리눅스 커맨드로 컨테이너 구현해보기"
+title:  "리눅스 커맨드로 컨테이너 구현"
 date:   2025-05-09
 categories: [docker, linux]
 description: 고래말고 펭귄이 만드는 컨테이너
