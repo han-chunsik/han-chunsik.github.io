@@ -1,0 +1,10 @@
+<div class="category-list container">
+    {% if page.categories %}
+      {% for category in page.categories %}
+        <a href="{{ '/categories/' | append: category | relative_url }}">
+          {{ category }}
+        </a>
+      {% endfor %}
+    {% endif %}
+  </div>
+  

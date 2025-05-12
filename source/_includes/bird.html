@@ -1,0 +1,10 @@
+<div class="bird-card">
+  <div class="bird-thumbnail">
+    <img src="{{ '/assets/images/bird/' | append: page.bird_image | prepend: site.baseurl }}" alt="{{ page.bird_name }}">
+  </div>
+  <div class="bird-text">
+    <h3>{{ page.bird_name }}</h3>
+    <p><em>{{ page.bird_scientific_name }}</em></p>
+    <p>{{ page.bird_description }}</p>
+  </div>
+</div>
