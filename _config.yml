@@ -33,7 +33,7 @@ keywords: "DevOps"
 
 # Site settings
 url: https://han-chunsik.github.io
-baseurl: "/blog"
+baseurl: ""
 # baseurl: ""
 
 # Author settings
