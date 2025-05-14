@@ -1,46 +1,67 @@
 .penguin-walk {
-    position: fixed;
-    bottom: 0;
-    left: -60px;
-    width: 50px;
-    z-index: 9999;
+  position: fixed;
+  bottom: 0;
+  left: -60px;
+  width: 50px;
+  z-index: 9999;
+  animation: penguinMove 60s linear infinite; /* 기본값: PC용 60초 */
+  cursor: pointer;
+}
+
+.penguin-walk img {
+  width: 50px;
+  height: auto;
+  pointer-events: none;
+}
+
+@keyframes penguinMove {
+  0% {
+    left: -200px;
+  }
+  100% {
+    left: 100vw;
+  }
+}
+
+/* 기본: 펭귄 보이고 이글루는 숨김 */
+.penguin-walk .penguin {
+  display: block;
+}
+.penguin-walk .igloo {
+  display: none;
+}
+
+/* hover 시: 펭귄 숨기고 이글루 보여줌 */
+.penguin-walk:hover .penguin {
+  display: none;
+}
+.penguin-walk:hover .igloo {
+  display: block;
+}
+
+.penguin-walk:hover {
+  animation-play-state: paused;
+}
+
+/* 📱 모바일 화면에서 애니메이션 시간 변경 */
+@media (max-width: 768px) {
+  .penguin-walk {
     animation: penguinMove 30s linear infinite;
-    cursor: pointer;
   }
-  
-  .penguin-walk img {
-    width: 50px;       /* 🟢 너비 고정 */
-    height: auto;      /* 🟢 세로 비율 유지 */
-    pointer-events: none;
+
+  .penguin-walk:hover .penguin {
+    display: block;
   }
-  
-  /* 걷는 애니메이션 */
-  @keyframes penguinMove {
-    0% {
-      left: -60px;
-    }
-    100% {
-      left: 100vw;
-    }
+  .penguin-walk:hover .igloo {
+    display: none;
   }
-  
-  /* hover 시 애니메이션 멈춤 */
+
   .penguin-walk:hover {
-    animation-play-state: paused;
+    animation-play-state: running;
   }
-  
-  /* hover 시 머리 위에 "home" 표시 */
+
   .penguin-walk:hover::after {
-    content: "home";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    font-size: 0.7rem;
-    padding: 3px 6px;
-    border-radius: 5px;
-    white-space: nowrap;
+    display: none;
+    content: none;
   }
-  
+}
