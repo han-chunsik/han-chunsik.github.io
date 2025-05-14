@@ -1,0 +1,46 @@
+.penguin-walk {
+    position: fixed;
+    bottom: 0;
+    left: -60px;
+    width: 50px;
+    z-index: 9999;
+    animation: penguinMove 30s linear infinite;
+    cursor: pointer;
+  }
+  
+  .penguin-walk img {
+    width: 50px;       /* 🟢 너비 고정 */
+    height: auto;      /* 🟢 세로 비율 유지 */
+    pointer-events: none;
+  }
+  
+  /* 걷는 애니메이션 */
+  @keyframes penguinMove {
+    0% {
+      left: -60px;
+    }
+    100% {
+      left: 100vw;
+    }
+  }
+  
+  /* hover 시 애니메이션 멈춤 */
+  .penguin-walk:hover {
+    animation-play-state: paused;
+  }
+  
+  /* hover 시 머리 위에 "home" 표시 */
+  .penguin-walk:hover::after {
+    content: "home";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 0.7rem;
+    padding: 3px 6px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+  
