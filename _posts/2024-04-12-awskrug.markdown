@@ -7,7 +7,7 @@ description: AWSKRUG 플랫폼 엔지니어링 소모임 기록
 comments: true
 bird_image: "hyacinthin.webp"
 bird_name: "히야신스 마카우(Hyacinthin Macow)"
-bird_scientific_name: " Anodorhynchus hyacinthinus"
+bird_scientific_name: "Anodorhynchus hyacinthinus"
 bird_description: "세계에서 가장 큰 앵무새로, 선명한 코발트 블루 색깔의 깃털과 강력한 검은 부리를 가지고 있습니다. 주로 브라질, 파라과이, 볼리비아 등 남아메리카 중부의 열대 사바나와 습지대에 서식하며, 야자 열매를 주요 먹이로 삼는다."
 ---
 
