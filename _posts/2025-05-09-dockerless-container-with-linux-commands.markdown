@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "리눅스 커맨드로 컨테이너 구현"
+title:  "리눅스 커맨드로 컨테이너 구현(작성중)"
 date:   2025-05-09
-categories: [docker, linux]
+categories: [container, linux]
 description: 고래말고 펭귄이 만드는 컨테이너
 comments: true
 bird_image: "frigatebird.webp"

@@ -6,7 +6,7 @@ categories: [security, knou]
 description: 정보보호의 기본 목표 및 컴퓨터 보안의 역사
 comments: true
 bird_image: "white-wagtail.webp"
-bird_name: "알락할미새 (white wagtail)"
+bird_name: "알락할미새 (White Wagtail)"
 bird_scientific_name: "Motacilla alba"
 bird_description: "알락할미새는 가늘고 긴 꼬리를 좌우로 까딱이는 특징으로 잘 알려진 작은 새다. 몸통은 흰색과 회색이 주를 이루고, 머리와 가슴에 검은 무늬가 있다. 개울가, 논, 잔디밭 등 물가에서 자주 관찰되며, 끊임없이 걷고 꼬리를 흔들며 먹이를 찾는다. 활달하고 민첩한 행동으로 많은 이들에게 친숙한 새이다."
 ---

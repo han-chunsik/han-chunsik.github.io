@@ -6,7 +6,7 @@ categories: [algorithm, knou]
 description: 알고리즘의 정의와 대표적인 설계 전략, 정확성과 효율성 분석 및 점근 표기법
 comments: true
 bird_image: "blue-footed-booby.webp"
-bird_name: "푸른발 부비새 (Blue-footed booby)"
+bird_name: "푸른발 부비새 (Blue footed booby)"
 bird_scientific_name: "Sula nebouxii"
 bird_description: "푸른발부비새는 동태평양의 바닷가와 섬에서 서식하는 바닷새로, 특히 갈라파고스 제도에서 많이 발견된다. 선명한 파란 발이 특징이다."
 ---
