@@ -222,18 +222,18 @@ O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³) < O(2ⁿ)
 - 점근 표기법으로 표현: `f(n) = O(g(n))`
 
 ```python
-# 예시 1 - O(n)
+# 예시 1 - O(n)  
 i = 1
 x = 0
-while i <= n:  # n
+while i <= n:  # n  
     x += 1
     i += 1
 
 
-# 예시 2 - O(n²)
+# 예시 2 - O(n²)  
 count = 0
-for i in range(n):          # n
-    for j in range(n):      # n
+for i in range(n):          # n  
+    for j in range(n):      # n  
         count += 1
 ```
 

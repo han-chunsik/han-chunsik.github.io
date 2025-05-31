@@ -11,7 +11,7 @@ sass:
   style: expanded # compressed # expanded
 
 # permalink and highlighter
-permalink   : /:year/:title/
+permalink   : /:year-:month-:day/:title/
 markdown:         kramdown
 kramdown:
   syntax_highlighter: rouge
