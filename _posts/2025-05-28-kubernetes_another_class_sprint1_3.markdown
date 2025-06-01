@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "기술의 흐름으로 이해하는 컨테이너"
-date:   2025-05-28
+date: 2025-05-28
 categories: [kubernetes, container, devops]
 description: "[Inflearn Warm-Up Club - DevOps] 매일 1% 성장하기"
 comments: true

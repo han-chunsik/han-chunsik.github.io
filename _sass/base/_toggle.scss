@@ -1,0 +1,29 @@
+details {
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    margin-bottom: 1em;
+    background-color: #f9f9f9;
+  }
+  
+  summary {
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    list-style: none;
+  }
+  
+  summary::marker {
+    display: none;
+  }
+  
+  summary::before {
+    content: "▶";
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform 0.2s ease;
+  }
+  
+  details[open] summary::before {
+    transform: rotate(90deg);
+  }
