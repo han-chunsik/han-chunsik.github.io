@@ -474,7 +474,7 @@ PV의 local 속성을 사용하면 노드의 로컬 스토리지를 직접 활�
 <summary>응용 과제</summary>
 <div markdown="1">
 
-### local 동작 확인
+### 1. local 동작 확인
 
 <img src="{{ '/assets/images/20250610_mission_pv_pvc_1.png' | prepend: site.baseurl }}" alt="mission pv pvc local test">
 
@@ -505,7 +505,7 @@ curl http://192.168.56.30:31231/list-file-pod
 curl http://192.168.56.30:31231/list-file-pv
 ```
 
-### hostPath 동작 확인
+### 2. hostPath 동작 확인
 
 ```shell
 # persistentVolumeClaim 삭제 후 hostPath로 수정
