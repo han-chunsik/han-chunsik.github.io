@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "helm과 Kustomize"
+title:  "배포 파이프라인 구축 - jenkins, helm/Kustomize, ArgoCD"
 date: 2025-06-13
 categories: [kubernetes, container, devops]
 description: "[Inflearn Warm-Up Club - DevOps] 매일 1% 성장하기"
