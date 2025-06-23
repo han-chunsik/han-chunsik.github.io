@@ -13,7 +13,7 @@ bird_description: "카나리아는 작고 밝은 노란색을 띠는 참새목 �
 
 > [**쿠버네티스 어나더 클래스 (지상편) - Sprint 1, 2**](https://www.inflearn.com/course/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%EC%96%B4%EB%82%98%EB%8D%94-%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%A7%80%EC%83%81%ED%8E%B8-sprint1)
 
-> 출처: [큐브옵스 - Helm과 Kustomize 비교하며 사용하기 (1/2)](https://cafe.naver.com/f-e/cafes/30725715/articles/98?boardtype=L&menuid=13&referrerAllArticles=false&page=2), [큐브옵스 - Helm과 Kustomize 비교하며 사용하기 (2/2)](https://cafe.naver.com/f-e/cafes/30725715/articles/104?boardtype=L&menuid=13&referrerAllArticles=false&page=1)  
+> 출처: [큐브옵스 - Helm과 Kustomize 비교하며 사용하기 (1/2)](https://cafe.naver.com/f-e/cafes/30725715/articles/98?boardtype=L&menuid=13&referrerAllArticles=false&page=2), [큐브옵스 - Helm과 Kustomize 비교하며 사용하기 (2/2)](https://cafe.naver.com/f-e/cafes/30725715/articles/104?boardtype=L&menuid=13&referrerAllArticles=false&page=1)    
 > 본 글은 출처를 참고하여 테스트를 진행한 결과를 바탕으로 작성하였습니다. 설치 및 실습 과정은 원문을 참고하시고, 이 글에서는 핵심 개념 정리와 추가 설명에 집중하였습니다.
 
 # 배포 파이프라인 구축 실습 - helm/kustomize

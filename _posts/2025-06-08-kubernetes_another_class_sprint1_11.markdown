@@ -13,7 +13,7 @@ bird_description: "알바트로스는 세계에서 가장 큰 날개폭(최대 3
 
 > [**쿠버네티스 어나더 클래스 (지상편) - Sprint 1, 2**](https://www.inflearn.com/course/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%EC%96%B4%EB%82%98%EB%8D%94-%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%A7%80%EC%83%81%ED%8E%B8-sprint1)
 
-> 출처: [큐브옵스 - Jenkins Pipeline (기초부터 Blue/Green까지)](https://cafe.naver.com/f-e/cafes/30725715/articles/87?boardtype=L&menuid=13&referrerAllArticles=false&page=2)  
+> 출처: [큐브옵스 - Jenkins Pipeline (기초부터 Blue/Green까지)](https://cafe.naver.com/f-e/cafes/30725715/articles/87?boardtype=L&menuid=13&referrerAllArticles=false&page=2)    
 > 본 글은 출처를 참고하여 테스트를 진행한 결과를 바탕으로 작성하였습니다. 설치 및 실습 과정은 원문을 참고하시고, 이 글에서는 핵심 개념 정리와 추가 설명에 집중하였습니다.
 
 
