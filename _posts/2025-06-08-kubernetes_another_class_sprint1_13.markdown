@@ -88,7 +88,8 @@ Airflow, Kubeflow와 유사한 워크플로우 엔진이다. 작업 실행 순�
 Argo CD는 다음과 같은 디렉토리 구조 또는 도구를 자동 인식하여 배포를 지원한다.
 - `Helm` chart 디렉토리
 - `Kustomization.yaml`이 포함된 디렉토리
-- 단순 `YAML` 파일 모음
+- 단순 `YAML` 파일 모음  
+
 Argo가 자동으로 어떤 방식인지 판단하고 배포를 수행한다.
 
 ### Manifest 개념
@@ -164,6 +165,108 @@ Argo Rollouts는 NGINX, Istio 등과 연동해 정교한 트래픽 분산이 가
 <details>
 <summary>ArgoCD Github 업데이트</summary>
 <div markdown="1">
+
+> 과정 - [링크](https://cafe.naver.com/f-e/cafes/30725715/articles/553?menuid=13&referrerAllArticles=false): Jenkins 빌드 후 Image Tag 변경 내용을 Github로 Push → ArgoCD로 자동 배포
+
+### ArgoCD로 App 생성
+<img src="{{ '/assets/images/20250624_argo_mission.png' | prepend: site.baseurl }}" alt="argo mission">
+
+```
+# App 생성 하기 - [+ NEW APP] 클릭
+
+# GENERAL
+
+Application Name : api-tester-2232-build-push-git
+Project Name : default
+SYNC POLICY : Manual
+
+# SOURCE
+Repository URL : https://github.com/<Github-Useranme>/kubernetes-anotherclass-sprint2.git
+Revision : main
+Path : 2232-build-push-git/deploy/helm/api-tester
+
+# DESTINATION
+Cluster URL : https://kubernetes.default.svc
+Namespace : anotherclass-223
+
+
+# Values files 지정
+VALUES FILES : values-dev.yaml 
+
+# 화면 상단 [CREATE] 클릭
+```
+
+### Jenkins에 Github Token 등록
+
+<img src="{{ '/assets/images/20250624_argo_mission02.png' | prepend: site.baseurl }}" alt="argo mission 02">
+
+```
+# Github 토큰 발급
+
+1. GitHub → Settings
+2. Developer settings : 왼쪽 메뉴 가장 하단에 위치
+3. Personal access tokens (classic) 선택 후 [Generate new token (classic)]
+
+Note : Update for Jenkins 
+Expiration : No expiration
+Select scopes : repo [체크]
+
+# 생성 후 발급된 키 별도로 보관
+```
+
+<img src="{{ '/assets/images/20250624_argo_mission03.png' | prepend: site.baseurl }}" alt="argo mission 03">
+
+```
+# Jenkins에 Credential 등록 - Dashboard > Jenkins 관리 > Credentials > System > Global credentials (unrestricted) 에서 [Add Credentials] 클릭 후 아래 내용 입력
+
+Kind : Username with password
+Scope : Global
+Username : <Github-Username>
+Password : <Github에서 발급 받은 토큰>
+ID : github_token
+Description : Github 업데이트 토큰
+```
+
+### Jeknins에서 Source/Container 빌드 후 Docker로 업로드
+
+<img src="{{ '/assets/images/20250624_argo_mission04.png' | prepend: site.baseurl }}" alt="argo mission 04">
+
+```
+# 새보기 및 item 생성
+[새보기] 만들기
+조회명 : 223
+Type : List View
+
+
+[item name] 만들기
+Enter an item name : 2232-build-push-git
+[Pipeline] 선택
+[OK] 버튼 클릭
+​
+
+# Configure
+Configure > General > GitHub project > Project url
+Project url : https://github.com/<Github-Useranme>/kubernetes-anotherclass-sprint2/
+Configure > Advanced Project Options > Pipeline > [저장] 
+Definition : Pipeline script from SCM
+Definition > SCM : Git
+Definition > SCM > Repositories > Repository URL : https://github.com/<Github_Username>/kubernetes-anotherclass-sprint2.git
+Definition > SCM > Branches to build > Branch Specifier : */main
+Definition > SCM > Branches to build > Additional Behaviours > Sparse Checkout paths > Path : 2232-build-push-git
+Definition > Script Path : 2232-build-push-git/Jenkinsfile
+```
+
+### Argo 자동배포 확인 후 이미지 확인
+
+<img src="{{ '/assets/images/20250624_argo_mission05.png' | prepend: site.baseurl }}" alt="argo mission 05">
+
+- Docker 업로드 후 이미지 변경 확인
+
+```
+kubectl get pods -n anotherclass-223 -o json | jq '.items[].spec.containers[].image'
+```
+
+
 
 </div>
 </details>
