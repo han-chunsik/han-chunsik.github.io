@@ -1,0 +1,271 @@
+---
+layout: post
+title:  "[우밖개] 항해99 백엔드 7기 회고"
+date:   2025-03-03
+categories: [spring, experience]
+description: 10주동안 개발 뚱땅뚱땅 해보기
+comments: true
+bird_image: "snowy-owl.webp"
+bird_name: "흰 올빼미(Snowy Owl)"
+bird_scientific_name: "Bubo scandiacus"
+bird_description: "북극권 툰드라 지역에 서식하는 대형 올빼미이다. 전신이 흰 깃털로 덮여 있어 눈 속에 잘 위장되며, 눈부신 노란 눈과 검은 부리, 성별에 따라 깃털에 무늬 차이가 있다. 주로 낮에도 사냥하는 드문 야행성 조류이며, 설치류와 토끼 등을 먹는다."
+---
+
+## Why?
+
+> **항해 플러스 백엔드 7기**
+> 2024년 12월 14일 ~ 2025년 03월 01일(총 10주)
+
+회사를 다니면서 개발보다는 이미 개발되어있는 기술들을 활용하는 업무들을 하다보니, 이런 기술들을 만들고 싶어졌다.
+
+_근데 그럴려면 개발을 할 줄 알아야 하잖아,,,,?_
+
+그래서 재직자를 위한 부트캠프가 있다는 이야기를 듣고, 여러 과정들을 살펴보던 중 항해99를 선택하여 참가하였다.
+
+## How?
+### 1. 일단 하자
+> 매 주 토요일 그 주에 해결해야하는 과제가 주어진다. 기본, 심화로 구성되어 있다.
+
+과정을 시작하면서, 목표한 건, 단 하나였다. **"일단 하자"** 
+10주동안 주어지는 과제 단 하나도 빼먹지 말자. 그게 목표였다.
+
+**"그래서 결과는?"**
+
+총 20개 중 19개의 과제를 제출했다. 여러 API를 설계하고 개발하는 과제였는데, 아무래도 Java가 익숙하지 않다보니, 10주 중 가장 개발할게 많은 과제에서 70% 정도의 개발만 완료했다. 
+
+나머지 19개의 과제도 많은 어려움이 있었고, 포기하고 싶은 마음도 컸지만 새벽까지 함께한 팀원들이 곁에 있으니 오히려 힘을 내서 제출할 수 있었다.
+
+<img src="{{ '/assets/images/20250303_hanghae_01.png' | prepend: site.baseurl }}" alt="20250303_hanghae_01">
+
+
+> 매주 토요일 과제 발제 때, 수강생 발표 시간이 있다.
+
+매주 토요일에 신청을 통해 기술 발표를 진행할 수 있었다. 그래서 "**일단 했다**"
+<img src="{{ '/assets/images/20250303_hanghae_02.png' | prepend: site.baseurl }}" alt="20250303_hanghae_02">
+
+과제를 진행하면서, 컨테이너를 사용해야하는 경우가 있었는데, 몇몇 분들이 컨테이너를 사용하신 적이 없다고 하셔서 해당 주제를 준비했었다.
+
+VM과 항상 비교되는 컨테이너의 특성을 비유를 통해 설명하며, 컨테이너가 무엇인지 발표했다.
+
+<img src="{{ '/assets/images/20250303_hanghae_03.png' | prepend: site.baseurl }}" alt="20250303_hanghae_03">
+
+
+온라인이었지만 100여명이 넘게 접속해있는 메타버스 환경에서의 발표가 은근 떨려서 긴장도 많이 했었지만, 발표 자료를 준비하면서 컨테이너의 개념을 다시 한 번 정리하고, 발표 경험도 쌓을 수 있어서 좋았다.
+
+### 2. 넘어져도 다시 일어나기
+미처 완성하지 못했던 과제 2개와 Fail 2개 그렇게 총 4개의 과제에 빨간 불이 들어왔고, 의욕이 떨어지고 자책도 많이 했었지만, 피드백이 있어서 도움이 많이 되었다. 넘어져도 일어나는 방법을 알려주니까 용기를 얻기에 충분했다.
+
+**첫번째 Fail**
+**문제**: 동시성 테스트 코드 진행 시 성공과 실패를 리스트에 담아 검증하여, 여러 스레드가 동시에 add()와 같은 메서드를 호출하면 데이터가 꼬일 수 있는 문제가 발생할 수 있었다.
+
+```java
+    @Nested
+    @DisplayName("동시성 제어 통합 테스트")
+    class SuccessCase {
+        @Test
+        @DisplayName("40명의 유저가 한번에 특강 신청 요청을 수행할때, 30명만 성공")
+        public void 동시에_동일한_특강에_대해_40명이_신청했을_때_30명만_성공하는_것을_검증() throws Exception {
+            //given
+            int threadCount = 40;
+            long eventId = 1L;
+            CountDownLatch doneSignal = new CountDownLatch(threadCount);
+            ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
+
+            List<Throwable> failedRequests = new ArrayList<>();
+            List<Long> successfulUserIds = new ArrayList<>();
+
+            // when
+            for (long i = 1; i <= threadCount; i++) {
+                final long userId = i;
+                executorService.execute(() -> {
+                    try {
+                        eventService.applyForEvent(userId, eventId);
+                        System.out.println(userId);
+                        successfulUserIds.add(userId);
+                    } catch (Exception e) {
+                        log.error("An error occurred: ", e);
+                        failedRequests.add(e);
+                    } finally {
+                        doneSignal.countDown(); // 각 스레드가 종료될 때마다 호출
+                    }
+                });
+            }
+            doneSignal.await();
+            executorService.shutdown();
+
+            assertEquals(30, successfulUserIds.size());
+            assertEquals(10, failedRequests.size());
+        }
+```
+
+**피드백**: `assertEquals(30, successfulUserIds.size());` `assertEquals(10, failedRequests.size());` 비동기 동작에서 정상작동 유무 확인필요 -> 리스트에 대한 접근이 동시에 이루어 질수있기때문 (AtomicLong 등을 사용해야합니다.)
+
+**해결**: `AtomicLong` 으로 변경하여 피드백을 반영했다.
+```java
+    @Nested
+    @DisplayName("동시성 제어 통합 테스트")
+    class SuccessCase {
+        @Test
+        @DisplayName("40명의 유저가 한번에 특강 신청 요청을 수행할때, 30명만 성공")
+        public void 동시에_동일한_특강에_대해_40명이_신청했을_때_30명만_성공하는_것을_검증() throws Exception {
+            //given
+            int threadCount = 40;
+            long eventId = 1L;
+            CountDownLatch doneSignal = new CountDownLatch(threadCount);
+            ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
+
+            AtomicLong successfulRequestCount = new AtomicLong(0);
+            AtomicLong failedRequestCount = new AtomicLong(0);
+
+            // when
+            for (long i = 1; i <= threadCount; i++) {
+                final long userId = i;
+                executorService.execute(() -> {
+                    try {
+                        eventService.applyForEvent(userId, eventId);
+                        System.out.println(userId);
+                        successfulRequestCount.incrementAndGet();
+                    } catch (Exception e) {
+                        log.error("An error occurred: ", e);
+                        failedRequestCount.incrementAndGet();
+                    } finally {
+                        doneSignal.countDown(); // 각 스레드가 종료될 때마다 호출
+                    }
+                });
+            }
+            doneSignal.await();
+            executorService.shutdown();
+
+            assertEquals(30, successfulRequestCount.get());
+            assertEquals(10, failedRequestCount.get());
+        }
+```
+
+**두번째, 세번째 Fail**
+**문제**: 기능 개발 미완성으로 기본은 일부만 제출하고, 심화는 제출하지 못했다.
+**해결**: 일부 제출한 과제에 대해서 책임 분리가 부족하고, 코드의 가독성이 떨어진다는 피드백을 받았다. 해당 피드백을 포함하여 부족한 기능을 개발했다. (아래 코드는 개선 전/후 중 일부이다.)
+
+- 개선 전
+```java
+    @Transactional
+    public BalanceChargeResult chargeBalance(Long userId, Long amount) {
+        // 1. 최소 충전 유효성 확인
+        if (amount < BalanceLimit.BALANCE_RECHARGE_LIMIT_MIN.getLimit()) {
+            throw new IllegalArgumentException("최소 충전 잔액은 " + BalanceLimit.BALANCE_RECHARGE_LIMIT_MIN.getLimit() + "입니다.");
+        }
+
+        // 2. 사용자 잔액 확인
+        Balance userBalance = balanceRepository.findFirstByUserIdWithLock(userId);
+
+        // 3. 사용자 잔액이 없는 경우 0 으로 잔액 생성
+        if (userBalance == null) {
+            userBalance = new Balance();
+            userBalance.create(userId, 0L);
+            balanceRepository.save(userBalance);
+        }
+
+        // 4. 잔액 충전
+        Long userBalanceId = userBalance.getId();
+        Long currentUserBalance = userBalance.getBalance();
+        long updateBalance = currentUserBalance + amount;
+
+        // 5. 최대 보유 잔액 유효성 확인
+        if (updateBalance > BalanceLimit.BALANCE_LIMIT_MAX.getLimit()) {
+            throw new IllegalArgumentException("충전 후 잔액이 " + BalanceLimit.BALANCE_LIMIT_MAX.getLimit() + "를 초과할 수 없습니다.");
+        }
+
+        // 6. 잔액 충전
+        userBalance.changeBalance(updateBalance);
+        balanceRepository.save(userBalance);
+
+        // 6. 잔액 충전 히스토리 저장
+        BalanceHistory balanceHistory = BalanceHistory.createBalanceHistory(userBalanceId, amount, BalanceHistory.Type.CHARGE);
+        balanceHistoryRepository.save(balanceHistory);
+
+        return BalanceChargeResult.builder()
+                .userId(userId)
+                .amount(amount)
+                .finalBalance(updateBalance)
+                .build();
+    }
+```
+
+- 개선 후
+```java
+    @Transactional
+    public BalanceChargeResult chargeBalance(long userId, long amount) {
+        // 1. 사용자 잔액 조회
+        Balance userBalance = balanceRepository.findFirstByUserIdWithLock(userId).orElseThrow(() -> new BalanceException(BalanceErrorCode.BALANCE_NOT_FOUND));
+
+        // 2. 잔액 충전
+        Balance updateUserBalance = userBalance.charge(amount);
+        balanceRepository.save(updateUserBalance);
+
+        // 3. 잔액 충전 히스토리 저장
+        BalanceHistory balanceHistory = BalanceHistory.createChargeBalanceHistory(userBalance, amount);
+        balanceHistoryRepository.save(balanceHistory);
+
+        return BalanceChargeResult.fromWithAmount(updateUserBalance, amount);
+```
+
+**네번째 Fail**
+**문제**: 이벤트 핸들러가 DB 데이터를 참조하거나 외부 API를 호출하지만 `@EventListener` 사용
+
+```java
+@Slf4j
+@Component
+public class ReservationEventListener {
+    @Async
+    @EventListener
+    public void sendPush(ReservationEvent reservationEvent) throws InterruptedException {
+        log.info("데이터 플랫폼 호출 [ReservationId : {}, ReservedAt {}]", reservationEvent.getId(), reservationEvent.getReservedAt());
+    }
+}
+```
+
+**피드백**: `@TransactionalEventListener`가 아닌 `@EventListener`를 사용했는데, 이렇게 작성하면 원 트랜잭션이 커밋되지 못하더라도 이벤트 리스너가 수행되기 때문에 커밋되지 못한 데이터의 유령 이벤트가 발행될 수 있어요. 커밋된 이후에 수행될 수 있도록 이벤트리스너를 변경해야 합니다.
+**해결**: 피드백 반영
+
+```java
+@Slf4j
+@RequiredArgsConstructor
+@Component
+public class ConfirmDataSentEventListener {
+
+    private final ReservationOutboxService reservationOutboxService;
+    private final ConfirmDataSentEventPublisher confirmDataSentEventPublisher;
+
+    @TransactionalEventListener(phase = BEFORE_COMMIT)
+    public void saveOutbox(ConfirmDataSentEvent event) {
+        ReservationOutbox outbox = event.toOutboxEntity(event);
+        reservationOutboxService.save(outbox);
+    }
+
+    @TransactionalEventListener(phase = AFTER_COMMIT)
+    public void sendOrderInfo(ConfirmDataSentEvent reservationEvent) {
+        confirmDataSentEventPublisher.send(reservationEvent);
+    }
+}
+```
+
+### 3. 와중에 받은 🥕(당근)
+> 매 주 과제 Pass와 별개로 피드백 주는 코치님의 Best Practice인 따봉과, 더 좋은 Best Practice를 의미하는 명예의 전당이 있다. 
+
+과제 발제 중 명예의 전당에 내 이름이 올랐다. 인덱싱을 이용한 쿼리 성능 개선을 하는 과제였는데, 단순 쿼리만을 보고 적용하지 않고, 비즈니스를 고려한 적용이 필요하다는 멘토링을 듣고 진행하였는데 명예의 전당에 올랐었다. _~~도파민이 정말 뿜뿜했었다.~~_
+
+<img src="{{ '/assets/images/20250303_hanghae_05.png' | prepend: site.baseurl }}" alt="20250303_hanghae_05">
+
+
+
+## What?
+그래서 10주간의 항해 끝에 얻은 결과는 다음과 같다.
+- 제출 횟수: 19
+- PASS 횟수: 16
+- BP 횟수: 1
+- 뱃지: 레드(80%이상 pass)
+<img src="{{ '/assets/images/20250303_hanghae_04.png' | prepend: site.baseurl }}" alt="20250303_hanghae_04">
+
+
+부족한 개발 실력을 보완하려고 신청했던거였는데, 10주라는 기간이 짧다면 짧고 길다면 긴 시간임에도 한 번 해봤다는 것과 키워드를 배웠다는거 만으로도 스스로 많은 변화를 체감한다.
+
+정말 좋은 동료들을 얻었고, 넓게 배운 것들로 시작을 할 수 있는 용기를 얻었기에, 스스로 나아갈 힘이 생겼다.
