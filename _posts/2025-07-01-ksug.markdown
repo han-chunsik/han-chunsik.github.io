@@ -91,7 +91,7 @@ Spring Camp 2025에 다녀왔다. 이 행사는 [KSUG(Korea Spring User Group)](
 
 ---
 
-## 4. MSA 트랜잭션 개발 가이드
+# 4. MSA 트랜잭션 개발 가이드
 
 ## MSA의 목적
 - 시스템을 독립적인 서비스로 분할
