@@ -39,8 +39,3 @@ Watcher는 두 가지 방식으로 설정 변경 트리거를 수행할 수 있�
 <img src="{{ '/assets/images/20250705_spring_kubernetes_watcher_msg.png' | prepend: site.baseurl }}" alt="spring kubernetes watcher message">
 
 변경 감지 시, 지정된 topic으로 설정 변경 메시지를 발행한다. Spring Cloud Bus가 해당 메시지를 구독하고, 이를 통해 각 서비스에 설정 리로드를 유도한다.
-
-# 튜토리얼
-## HTTP 방식
-
-## 메시지 브로커 방식
